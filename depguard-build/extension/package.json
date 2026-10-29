@@ -1,0 +1,77 @@
+{
+  "name": "depguard",
+  "displayName": "DepGuard",
+  "description": "Detects AI-hallucinated and malicious packages before you install them.",
+  "version": "0.2.0",
+  "publisher": "depguard-fyp",
+  "engines": {
+    "vscode": "^1.93.0"
+  },
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "activationEvents": [
+    "workspaceContains:**/package.json",
+    "workspaceContains:**/requirements.txt"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "depguard.scanProject",
+        "title": "DepGuard: Scan Dependencies"
+      },
+      {
+        "command": "depguard.scanFile",
+        "title": "DepGuard: Scan Current File"
+      },
+      {
+        "command": "depguard.checkPackage",
+        "title": "DepGuard: Check a Package..."
+      },
+      {
+        "command": "depguard.checkBackend",
+        "title": "DepGuard: Check Backend Status"
+      },
+      {
+        "command": "depguard.viewHistory",
+        "title": "DepGuard: View Scan History"
+      },
+      {
+        "command": "depguard.showSummary",
+        "title": "DepGuard: Show Project Summary"
+      },
+      {
+        "command": "depguard.startBackend",
+        "title": "DepGuard: Start Backend Server"
+      }
+    ],
+    "configuration": {
+      "title": "DepGuard",
+      "properties": {
+        "depguard.apiUrl": {
+          "type": "string",
+          "default": "http://127.0.0.1:8000",
+          "description": "URL of the DepGuard backend."
+        },
+        "depguard.scanOnSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Scan package.json / requirements.txt whenever they are saved."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package --allow-missing-repository"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.93.0",
+    "typescript": "^5.4.0",
+    "@vscode/vsce": "^3.0.0"
+  }
+}

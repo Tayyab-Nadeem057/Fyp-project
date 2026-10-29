@@ -1,0 +1,48 @@
+{
+  "name": "depguard",
+  "displayName": "DepGuard",
+  "description": "Detects AI-hallucinated and malicious Python packages before you install them.",
+  "version": "0.2.0",
+  "publisher": "depguard-fyp",
+  "engines": { "vscode": "^1.93.0" },
+  "categories": ["Linters", "Other"],
+  "activationEvents": [
+    "workspaceContains:**/requirements*.txt",
+    "workspaceContains:**/Pipfile",
+    "workspaceContains:**/pyproject.toml"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      { "command": "depguard.scanProject", "title": "DepGuard: Scan Python Dependencies" },
+      { "command": "depguard.scanFile", "title": "DepGuard: Scan Current File" },
+      { "command": "depguard.checkPackage", "title": "DepGuard: Check a Python Package..." }
+    ],
+    "configuration": {
+      "title": "DepGuard",
+      "properties": {
+        "depguard.apiUrl": {
+          "type": "string",
+          "default": "http://127.0.0.1:8000",
+          "description": "URL of the DepGuard backend."
+        },
+        "depguard.scanOnSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Scan requirements.txt whenever it is saved."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.93.0",
+    "typescript": "^5.4.0",
+    "@vscode/vsce": "^3.0.0"
+  }
+}
